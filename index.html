@@ -158,20 +158,33 @@
                 <p>A safe space for your mind</p>
             </header>
             
-            <div class="card" style="text-align: center; margin: 0 10px;">
-                <p style="opacity: 0.9; font-size: 0.5rem; line-height: 1.6; margin-bottom: 5px; font-family: 'Noto Sans Sinhala';">
-                    ඔබේ හිත දැඩි පීඩාවකින් සහ ඉක්මණින් උදව් අවශ්‍ය නම් පහත අංකය අමතන්න
-                </p>
-                <div class="flag-container">
-                    <a href="tel:1926" class="flag-link" style="text-decoration: none;">
-                        <img src="https://flagcdn.com/w160/lk.png" class="flag-circle" alt="Sri Lanka">
-                        <span style="font-size: 0.75rem; color: var(--accent); font-weight: 600; display: block;">1926</span>
-                    </a>
-                    <a href="tel:988" class="flag-link" style="text-decoration: none;">
-                        <img src="https://flagcdn.com/w160/ca.png" class="flag-circle" alt="Canada">
-                        <span style="font-size: 0.75rem; color: var(--accent); font-weight: 600; display: block;">988</span>
-                    </a>
-                </div>
+            <div id="screen-support" class="screen active">
+    <header style="margin-top: 30px;">
+        <img src="logo.png" alt="Logo" class="app-logo-hero" onerror="this.style.display='none'">
+        <h1>Confession Wall</h1>
+        <p>A safe space for your mind</p>
+    </header>
+    
+    <div style="text-align: center; margin: 0 10px;">
+        <p style="opacity: 0.9; font-size: 0.5 rem; line-height: 1.6; margin-bottom: 5px; font-family: 'Noto Sans Sinhala';">
+            ඔබේ හිත දැඩි පීඩාවකින් සහ ඉක්මණින් උදව් අවශ්‍ය නම් පහත අංකය අමතන්න
+        </p>
+        <div class="flag-container">
+            <a href="tel:1926" class="flag-link" style="text-decoration: none;">
+                <img src="https://flagcdn.com/w160/lk.png" class="flag-circle" alt="Sri Lanka">
+                <span style="font-size: 0.75rem; color: var(--accent); font-weight: 600; display: block;">1926</span>
+            </a>
+            <a href="tel:988" class="flag-link" style="text-decoration: none;">
+                <img src="https://flagcdn.com/w160/ca.png" class="flag-circle" alt="Canada">
+                <span style="font-size: 0.75rem; color: var(--accent); font-weight: 600; display: block;">988</span>
+            </a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 15px; align-items: center; margin-top: 20px;">
+            <button class="btn-small" onclick="navTo('screen-wall')">Enter Wall</button>
+            <button class="btn-small btn-outline-small" onclick="navTo('screen-breathing'); startBreathing();">Relax First</button>
+        </div>
+    </div>
+</div>
                 <div style="display: flex; flex-direction: column; gap: 15px; align-items: center; margin-top: 20px;">
                     <button class="btn-small" onclick="navTo('screen-wall')">Enter Wall</button>
                     <button class="btn-small btn-outline-small" onclick="navTo('screen-breathing'); startBreathing();">Relax First</button>
