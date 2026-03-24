@@ -52,8 +52,6 @@
         }
 
         header { text-align: center; margin: 10px 0 20px; }
-        
-        /* Specific sizing for screens */
         .app-logo-hero { width: 120px; height: auto; margin-bottom: 15px; filter: drop-shadow(0 0 15px var(--accent)); }
         .app-logo-small { width: 60px; height: auto; margin-bottom: 5px; filter: drop-shadow(0 0 8px var(--accent)); }
         
@@ -71,7 +69,6 @@
             margin-bottom: 20px;
         }
 
-        /* Branding Footer - Constant Location */
         .footer-branding {
             display: flex;
             align-items: center;
@@ -83,24 +80,11 @@
             z-index: 20;
         }
 
-        .footer-logo-link {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            transition: transform 0.3s;
-        }
-
+        .footer-logo-link { display: flex; align-items: center; text-decoration: none; transition: transform 0.3s; }
         .footer-logo-link:hover { transform: scale(1.05); }
         .footer-logo { width: 38px; height: auto; }
+        .footer-text { font-family: 'Quicksand', sans-serif; font-size: 0.85rem; color: var(--text); font-weight: 500; }
 
-        .footer-text {
-            font-family: 'Quicksand', sans-serif;
-            font-size: 0.85rem;
-            color: var(--text);
-            font-weight: 500;
-        }
-
-        /* Screen States */
         #screen-support {
             background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
             border-radius: 30px;
@@ -108,104 +92,43 @@
             margin-top: 2.5vh;
         }
 
-        .flag-container {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin: 20px 0;
-        }
-
+        .flag-container { display: flex; justify-content: center; gap: 25px; margin: 20px 0; }
         .flag-circle {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            border: 2px solid var(--border);
-            object-fit: cover;
-            margin-bottom: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--border);
+            object-fit: cover; margin-bottom: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .btn-small {
-            padding: 12px 25px;
-            font-size: 0.9rem;
-            border-radius: 14px;
-            background: var(--accent);
-            color: #000;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            width: auto;
-            min-width: 140px;
-            transition: 0.3s;
+            padding: 12px 25px; font-size: 0.9rem; border-radius: 14px; background: var(--accent);
+            color: #000; font-weight: 700; border: none; cursor: pointer; min-width: 140px; transition: 0.3s;
         }
 
-        .btn-outline-small {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: #fff;
-        }
+        .btn-outline-small { background: transparent; border: 1px solid var(--border); color: #fff; }
 
         .label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.5; margin-bottom: 12px; display: block; }
 
-        .emotion-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
+        .emotion-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
         .emotion-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            padding: 10px 2px;
-            border-radius: 15px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            transition: all 0.2s ease;
+            display: flex; flex-direction: column; align-items: center; cursor: pointer; padding: 10px 2px;
+            border-radius: 15px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); transition: all 0.2s ease;
         }
-
         .emotion-item.active { background: rgba(255,255,255,0.1); border-color: var(--accent); box-shadow: 0 0 15px var(--accent); }
 
         textarea {
-            width: 100%;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 15px;
-            color: white;
-            font-family: inherit;
-            resize: none;
-            outline: none;
-            margin-bottom: 15px;
+            width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 20px;
+            padding: 15px; color: white; font-family: inherit; resize: none; outline: none; margin-bottom: 15px;
         }
 
         .btn-send {
-            width: 100%;
-            padding: 16px;
-            border-radius: 18px;
-            border: none;
-            background: var(--accent);
-            color: #000;
-            font-weight: 800;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 100%; padding: 16px; border-radius: 18px; border: none; background: var(--accent);
+            color: #000; font-weight: 800; font-size: 1rem; cursor: pointer; transition: all 0.3s;
+            display: flex; align-items: center; justify-content: center;
         }
-
         .btn-send:disabled { background: #1e293b; color: #475569; cursor: not-allowed; }
 
         .breathing-sphere {
-            width: 120px; height: 120px;
-            background: var(--accent);
-            border-radius: 50%;
-            margin: 40px auto;
-            box-shadow: 0 0 50px var(--accent);
-            transition: all 4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 120px; height: 120px; background: var(--accent); border-radius: 50%;
+            margin: 40px auto; box-shadow: 0 0 50px var(--accent); transition: all 3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .screen { display: none; flex-direction: column; width: 100%; height: 100%; }
@@ -227,10 +150,7 @@
             </header>
             
             <div class="card" style="text-align: center; margin: 0 10px;">
-                <p style="opacity: 0.8; font-size: 0.9rem; line-height: 1.6; margin-bottom: 5px;">
-                    Take a deep breath. Support is here.
-                </p>
-                
+                <p style="opacity: 0.8; font-size: 0.9rem; line-height: 1.6; margin-bottom: 5px;">Take a deep breath. Support is here.</p>
                 <div class="flag-container">
                     <a href="tel:1926" class="flag-link" style="text-decoration: none;">
                         <img src="https://flagcdn.com/w160/lk.png" class="flag-circle" alt="Sri Lanka">
@@ -241,7 +161,6 @@
                         <span style="font-size: 0.75rem; color: var(--accent); font-weight: 600; display: block;">988</span>
                     </a>
                 </div>
-
                 <div style="display: flex; flex-direction: column; gap: 15px; align-items: center; margin-top: 20px;">
                     <button class="btn-small" onclick="navTo('screen-wall')">Enter Wall</button>
                     <button class="btn-small btn-outline-small" onclick="navTo('screen-breathing'); startBreathing();">Relax First</button>
@@ -279,10 +198,8 @@
                     <div class="emotion-item" onclick="setMood('Lonely', '#64748b', '#0f172a')"><span>😶</span><span>Lonely</span></div>
                     <div class="emotion-item" onclick="setMood('Confused', '#a855f7', '#1a0b2e')"><span>🤔</span><span>Confused</span></div>
                 </div>
-
                 <span class="label">Your message</span>
                 <textarea id="confession" rows="5" placeholder="Write something..."></textarea>
-
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                     <span style="font-size: 0.8rem; opacity: 0.7;">Allow comments?</span>
                     <div style="display: flex; gap: 5px; background: rgba(0,0,0,0.2); padding: 4px; border-radius: 10px;">
@@ -290,7 +207,6 @@
                         <button id="opt-yes" class="btn-small btn-outline-small" style="min-width:60px; padding:6px 12px;" onclick="setComments('Yes')">Yes</button>
                     </div>
                 </div>
-
                 <button id="send-btn" class="btn-send" disabled onclick="handleSend()">Post Confession</button>
             </div>
         </div>
@@ -329,12 +245,15 @@
             const sphere = document.getElementById('breathing-sphere');
             const text = document.getElementById('breathing-text');
             let step = 0;
+            
+            // Cycle: Exhale -> Hold -> Inhale -> Hold (3s per phase)
             const phases = [
-                { t: "Inhale...", s: "220px", o: "1", b: "50px" },
-                { t: "Hold...", s: "220px", o: "0.6", b: "70px" },
                 { t: "Exhale...", s: "110px", o: "1", b: "30px" },
-                { t: "Hold...", s: "110px", o: "0.6", b: "10px" }
+                { t: "Hold...", s: "110px", o: "0.6", b: "10px" },
+                { t: "Inhale...", s: "220px", o: "1", b: "50px" },
+                { t: "Hold...", s: "220px", o: "0.6", b: "70px" }
             ];
+            
             const cycle = () => {
                 const p = phases[step % 4];
                 text.innerText = p.t;
@@ -345,7 +264,7 @@
                 step++;
             };
             cycle();
-            breatheInterval = setInterval(cycle, 4000);
+            breatheInterval = setInterval(cycle, 3000); // Fast 3s phases
         }
 
         function stopBreathing() { clearInterval(breatheInterval); }
