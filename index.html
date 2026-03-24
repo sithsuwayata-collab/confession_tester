@@ -51,40 +51,12 @@
             position: relative;
         }
 
-        /* --- UPDATED HEADER FOR NEW LOGO --- */
-        header { 
-            text-align: center; 
-            margin: 20px 0 30px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center;
-        }
+        header { text-align: center; margin: 10px 0 20px; }
+        .app-logo-hero { width: 120px; height: auto; margin-bottom: 15px; filter: drop-shadow(0 0 15px var(--accent)); }
+        .app-logo-small { width: 60px; height: auto; margin-bottom: 5px; filter: drop-shadow(0 0 8px var(--accent)); }
         
-        .app-logo-new { 
-            width: 140px; /* Bigger size for the integrated logo */
-            height: auto; 
-            margin-bottom: 20px; 
-            filter: drop-shadow(0 0 12px rgba(0, 242, 255, 0.4));
-        }
-        
-        /* Font styles matching the new logo and subtitle */
-        header h1 { 
-            font-family: 'Inter', sans-serif;
-            font-weight: 700; 
-            letter-spacing: 0.5px; 
-            margin: 0; 
-            font-size: 2.1rem; /* Slightly larger, bold font */
-            color: var(--accent); /* Teal color */
-        }
-        
-        header p { 
-            font-family: 'Inter', sans-serif;
-            opacity: 0.5; /* Lighter grey subtitle */
-            font-size: 0.9rem; /* Smaller subtitle font */
-            margin-top: 8px; 
-            letter-spacing: 0.5px;
-        }
-        /* ---------------------------------- */
+        header h1 { font-weight: 700; letter-spacing: 1px; margin: 0; font-size: 2rem; color: var(--accent); }
+        header p { opacity: 0.6; font-size: 0.85rem; margin-top: 5px; }
 
         .card {
             background: var(--glass);
@@ -97,63 +69,6 @@
             margin-bottom: 20px;
         }
 
-        .label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.5; margin-bottom: 12px; display: block; }
-
-        .emotion-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .emotion-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            padding: 10px 2px;
-            border-radius: 15px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            transition: all 0.2s ease;
-        }
-
-        .emotion-item.active { background: rgba(255,255,255,0.1); border-color: var(--accent); box-shadow: 0 0 15px var(--accent); }
-
-        textarea {
-            width: 100%;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 15px;
-            color: white;
-            font-family: inherit;
-            resize: none;
-            outline: none;
-            margin-bottom: 15px;
-        }
-
-        .btn-send {
-            width: 100%;
-            padding: 16px;
-            border-radius: 18px;
-            border: none;
-            background: var(--accent);
-            color: #000;
-            font-weight: 800;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            margin-bottom: 12px;
-        }
-
-        .btn-send:disabled { background: #1e293b; color: #475569; cursor: not-allowed; }
-
-        /* The common branding footer from other screens */
         .footer-branding {
             display: flex;
             align-items: center;
@@ -161,17 +76,68 @@
             gap: 12px;
             margin-top: auto;
             padding-bottom: 25px;
-            opacity: 0.8;
+            opacity: 0.9;
             z-index: 20;
         }
 
+        .footer-logo-link { display: flex; align-items: center; text-decoration: none; transition: transform 0.3s; }
+        .footer-logo-link:hover { transform: scale(1.05); }
         .footer-logo { width: 38px; height: auto; }
+        .footer-text { font-family: 'Quicksand', sans-serif; font-size: 0.85rem; color: var(--text); font-weight: 500; }
 
-        .footer-text {
+        #screen-support {
+            background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+            border-radius: 30px;
+            height: 95vh;
+            margin-top: 2.5vh;
+        }
+
+        .flag-container { display: flex; justify-content: center; gap: 25px; margin: 20px 0; }
+        .flag-circle {
+            width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--border);
+            object-fit: cover; margin-bottom: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-small {
+            padding: 12px 25px; font-size: 0.9rem; border-radius: 14px; background: var(--accent);
+            color: #000; font-weight: 700; border: none; cursor: pointer; min-width: 140px; transition: 0.3s;
+        }
+
+        .btn-outline-small { background: transparent; border: 1px solid var(--border); color: #fff; }
+
+        .label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.5; margin-bottom: 12px; display: block; }
+
+        .emotion-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
+        .emotion-item {
+            display: flex; flex-direction: column; align-items: center; cursor: pointer; padding: 10px 2px;
+            border-radius: 15px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); transition: all 0.2s ease;
+        }
+        .emotion-item.active { background: rgba(255,255,255,0.1); border-color: var(--accent); box-shadow: 0 0 15px var(--accent); }
+
+        textarea {
+            width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 20px;
+            padding: 15px; color: white; font-family: inherit; resize: none; outline: none; margin-bottom: 15px;
+        }
+
+        .btn-send {
+            width: 100%; padding: 16px; border-radius: 18px; border: none; background: var(--accent);
+            color: #000; font-weight: 800; font-size: 1rem; cursor: pointer; transition: all 0.3s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .btn-send:disabled { background: #1e293b; color: #475569; cursor: not-allowed; }
+
+        .breathing-sphere {
+            width: 120px; height: 120px; background: var(--accent); border-radius: 50%;
+            margin: 40px auto; box-shadow: 0 0 50px var(--accent); transition: all 3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #timer-display {
             font-family: 'Quicksand', sans-serif;
-            font-size: 0.85rem;
-            color: var(--text);
+            font-size: 2.5rem;
+            color: var(--accent);
             font-weight: 500;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--accent);
         }
 
         .screen { display: none; flex-direction: column; width: 100%; height: 100%; }
@@ -185,39 +151,87 @@
 
     <div class="app-shell">
         
-        <header>
-            <img src="logo.png" alt="Logo" class="app-logo-new" onerror="this.style.display='none'">
-            <h1>Confession Wall</h1>
-            <p>Speak your truth anonymously</p>
-        </header>
-        <div id="main-card" class="card">
-            <span class="label">Choose your mood</span>
-            <div class="emotion-grid">
-                <div class="emotion-item" onclick="setMood('Happy', '#f59e0b', '#2d1a01')"><span>😊</span><span>Happy</span></div>
-                <div class="emotion-item" onclick="setMood('Sad', '#3b82f6', '#020617')"><span>😢</span><span>Sad</span></div>
-                <div class="emotion-item" onclick="setMood('Angry', '#ef4444', '#1a0505')"><span>😠</span><span>Angry</span></div>
-                <div class="emotion-item" onclick="setMood('Calm', '#10b981', '#051a10')"><span>😌</span><span>Calm</span></div>
-                <div class="emotion-item" onclick="setMood('Excited', '#ec4899', '#2d061a')"><span>🤩</span><span>Excited</span></div>
-                <div class="emotion-item" onclick="setMood('Loved', '#f43f5e', '#31040d')"><span>🥰</span><span>Loved</span></div>
-                <div class="emotion-item" onclick="setMood('Lonely', '#64748b', '#0f172a')"><span>😶</span><span>Lonely</span></div>
-                <div class="emotion-item" onclick="setMood('Confused', '#a855f7', '#1a0b2e')"><span>🤔</span><span>Confused</span></div>
-            </div>
-
-            <span class="label">Your message</span>
-            <textarea id="confession" rows="5" placeholder="Write something..."></textarea>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <span style="font-size: 0.8rem; opacity: 0.7;">Allow comments?</span>
-                <div style="display: flex; gap: 5px; background: rgba(0,0,0,0.2); padding: 4px; border-radius: 10px;">
-                    <button id="opt-no" class="btn-send active" style="width:auto; padding:6px 12px; font-size:0.75rem; margin:0;" onclick="setComments('No')">No</button>
-                    <button id="opt-yes" class="btn-send btn-outline-small" style="width:auto; padding:6px 12px; font-size:0.75rem; margin:0;" onclick="setComments('Yes')">Yes</button>
+        <div id="screen-support" class="screen active">
+            <header style="margin-top: 30px;">
+                <img src="logo.png" alt="Logo" class="app-logo-hero" onerror="this.style.display='none'">
+                <h1>Confession Wall</h1>
+                <p>A safe space for your mind</p>
+            </header>
+            
+            <div class="card" style="text-align: center; margin: 0 10px;">
+                <p style="opacity: 0.9; font-size: 0.5rem; line-height: 1.6; margin-bottom: 5px; font-family: 'Noto Sans Sinhala';">
+                    ඔබේ හිත දැඩි පීඩාවකින් සහ ඉක්මණින් උදව් අවශ්‍ය නම් පහත අංකය අමතන්න
+                </p>
+                <div class="flag-container">
+                    <a href="tel:1926" class="flag-link" style="text-decoration: none;">
+                        <img src="https://flagcdn.com/w160/lk.png" class="flag-circle" alt="Sri Lanka">
+                        <span style="font-size: 0.75rem; color: var(--accent); font-weight: 600; display: block;">1926</span>
+                    </a>
+                    <a href="tel:988" class="flag-link" style="text-decoration: none;">
+                        <img src="https://flagcdn.com/w160/ca.png" class="flag-circle" alt="Canada">
+                        <span style="font-size: 0.75rem; color: var(--accent); font-weight: 600; display: block;">988</span>
+                    </a>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 15px; align-items: center; margin-top: 20px;">
+                    <button class="btn-small" onclick="navTo('screen-wall')">Enter Wall</button>
+                    <button class="btn-small btn-outline-small" onclick="navTo('screen-breathing'); startBreathing();">Relax First</button>
                 </div>
             </div>
-
-            <button id="send-btn" class="btn-send" disabled onclick="handleSend()">Post Confession</button>
         </div>
 
-        <div class="footer-branding" style="display:none;">
+        <div id="screen-breathing" class="screen">
+            <header>
+                <div id="timer-display">01:00</div>
+                <p>Relax and follow the light</p>
+            </header>
+            <div class="card" style="text-align: center; padding: 20px 20px;">
+                <div id="breathing-text" style="font-size: 1.5rem; color: var(--accent); font-weight: 300; height: 2rem;">Ready?</div>
+                <div id="breathing-sphere" class="breathing-sphere"></div>
+                <button class="btn-small btn-outline-small" style="margin-top: 20px;" onclick="stopBreathing(); navTo('screen-wall');">I'm Ready Now</button>
+            </div>
+        </div>
+
+        <div id="screen-wall" class="screen">
+            <header>
+                <img src="logo.png" alt="Logo" class="app-logo-small" onerror="this.style.display='none'">
+                <h1>Confession Wall</h1>
+                <p>Speak your truth anonymously</p>
+            </header>
+            <div class="card">
+                <span class="label">Choose your mood</span>
+                <div class="emotion-grid">
+                    <div class="emotion-item" onclick="setMood('Happy', '#f59e0b', '#2d1a01')"><span>😊</span><span>Happy</span></div>
+                    <div class="emotion-item" onclick="setMood('Sad', '#3b82f6', '#020617')"><span>😢</span><span>Sad</span></div>
+                    <div class="emotion-item" onclick="setMood('Angry', '#ef4444', '#1a0505')"><span>😠</span><span>Angry</span></div>
+                    <div class="emotion-item" onclick="setMood('Calm', '#10b981', '#051a10')"><span>😌</span><span>Calm</span></div>
+                    <div class="emotion-item" onclick="setMood('Excited', '#ec4899', '#2d061a')"><span>🤩</span><span>Excited</span></div>
+                    <div class="emotion-item" onclick="setMood('Loved', '#f43f5e', '#31040d')"><span>🥰</span><span>Loved</span></div>
+                    <div class="emotion-item" onclick="setMood('Lonely', '#64748b', '#0f172a')"><span>😶</span><span>Lonely</span></div>
+                    <div class="emotion-item" onclick="setMood('Confused', '#a855f7', '#1a0b2e')"><span>🤔</span><span>Confused</span></div>
+                </div>
+                <span class="label">Your message</span>
+                <textarea id="confession" rows="5" placeholder="Write something..."></textarea>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <span style="font-size: 0.8rem; opacity: 0.7;">Allow comments?</span>
+                    <div style="display: flex; gap: 5px; background: rgba(0,0,0,0.2); padding: 4px; border-radius: 10px;">
+                        <button id="opt-no" class="btn-small" style="min-width:60px; padding:6px 12px;" onclick="setComments('No')">No</button>
+                        <button id="opt-yes" class="btn-small btn-outline-small" style="min-width:60px; padding:6px 12px;" onclick="setComments('Yes')">Yes</button>
+                    </div>
+                </div>
+                <button id="send-btn" class="btn-send" disabled onclick="handleSend()">Post Confession</button>
+            </div>
+        </div>
+
+        <div id="screen-success" class="screen">
+            <div class="card" style="text-align: center; margin-top: 100px;">
+                <div style="font-size: 4rem; margin-bottom: 20px;">🕊️</div>
+                <h2 style="color:var(--accent);">Sent</h2>
+                <p style="opacity: 0.8;">Your confession will appear within 24 hours.</p>
+                <button class="btn-send" style="margin-top: 25px;" onclick="location.reload()">Back</button>
+            </div>
+        </div>
+
+        <div class="footer-branding">
             <a href="https://www.facebook.com/groups/sithsuwaarana" target="_blank" class="footer-logo-link">
                 <img src="logo.png" alt="Logo" class="footer-logo" onerror="this.style.display='none'">
             </a>
@@ -226,17 +240,108 @@
 
     </div>
 
-    <div id="screen-success" class="screen">
-        <div class="card" style="text-align: center; margin-top: 100px;">
-            <div style="font-size: 4rem; margin-bottom: 20px;">🕊️</div>
-            <h2 style="color:var(--accent);">Sent</h2>
-            <p style="opacity: 0.8;">Your confession will appear within 24 hours.</p>
-            <button class="btn-send" style="margin-top: 25px;" onclick="location.reload()">Back</button>
-        </div>
-    </div>
-
     <script>
-        // Rest of your JS logic here...
+        let selectedMood = "";
+        let allowComments = "No";
+        let breatheInterval, timerInterval;
+        const textarea = document.getElementById('confession');
+        const sendBtn = document.getElementById('send-btn');
+
+        function navTo(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function startBreathing() {
+            const sphere = document.getElementById('breathing-sphere');
+            const text = document.getElementById('breathing-text');
+            const timerDisplay = document.getElementById('timer-display');
+            let step = 0;
+            let timeLeft = 60;
+
+            // Timer Logic
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                let mins = Math.floor(timeLeft / 60);
+                let secs = timeLeft % 60;
+                timerDisplay.innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    stopBreathing();
+                    navTo('screen-wall');
+                }
+            }, 1000);
+
+            // Cycle Logic
+            const phases = [
+                { t: "Exhale...", s: "110px", o: "1", b: "30px" },
+                { t: "Hold...", s: "110px", o: "0.6", b: "10px" },
+                { t: "Inhale...", s: "220px", o: "1", b: "50px" },
+                { t: "Hold...", s: "220px", o: "0.6", b: "70px" }
+            ];
+            
+            const cycle = () => {
+                const p = phases[step % 4];
+                text.innerText = p.t;
+                sphere.style.width = p.s;
+                sphere.style.height = p.s;
+                sphere.style.opacity = p.o;
+                sphere.style.boxShadow = `0 0 ${p.b} var(--accent)`;
+                step++;
+            };
+            cycle();
+            breatheInterval = setInterval(cycle, 3000);
+        }
+
+        function stopBreathing() { 
+            clearInterval(breatheInterval); 
+            clearInterval(timerInterval);
+        }
+
+        function setMood(mood, color, darkColor) {
+            selectedMood = mood;
+            document.documentElement.style.setProperty('--accent', color);
+            document.documentElement.style.setProperty('--bg-color', darkColor);
+            document.querySelectorAll('.emotion-item').forEach(el => {
+                el.classList.remove('active');
+                if(el.innerText.includes(mood)) el.classList.add('active');
+            });
+            validate();
+        }
+
+        function setComments(val) {
+            allowComments = val;
+            const y = document.getElementById('opt-yes');
+            const n = document.getElementById('opt-no');
+            if(val === 'Yes'){
+                y.classList.remove('btn-outline-small');
+                n.classList.add('btn-outline-small');
+            } else {
+                n.classList.remove('btn-outline-small');
+                y.classList.add('btn-outline-small');
+            }
+        }
+
+        textarea.addEventListener('input', validate);
+        function validate() { sendBtn.disabled = !(selectedMood !== "" && textarea.value.trim().length > 2); }
+
+        function handleSend() {
+            sendBtn.disabled = true;
+            sendBtn.innerText = "Posting...";
+            const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeAjECgMa-xcpy0LrZLWwW9GLmk6e7KStAdCm7qBFslchRHnA/formResponse";
+            const formData = new FormData();
+            formData.append("entry.1714490811", selectedMood);
+            formData.append("entry.1532578280", textarea.value.trim());
+            formData.append("entry.2052317827", allowComments);
+
+            fetch(googleFormUrl, { method: "POST", mode: "no-cors", body: formData })
+            .then(() => { navTo('screen-success'); })
+            .catch(() => {
+                alert("Failed. Check connection.");
+                sendBtn.disabled = false;
+                sendBtn.innerText = "Post Confession";
+            });
+        }
     </script>
 </body>
 </html>
