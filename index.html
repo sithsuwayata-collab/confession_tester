@@ -67,9 +67,7 @@
             margin-bottom: 20px;
         }
 
-        /* First Screen Customizations */
         #screen-support {
-            /* Replace the background below if you have an image URL */
             background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
             border-radius: 30px;
             height: 95vh;
@@ -122,6 +120,28 @@
             background: transparent;
             border: 1px solid var(--border);
             color: #fff;
+        }
+
+        .footer-branding {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: auto;
+            padding-bottom: 25px;
+            opacity: 0.6;
+        }
+
+        .footer-logo {
+            width: 24px;
+            height: auto;
+            filter: grayscale(1) brightness(1.5);
+        }
+
+        .footer-text {
+            font-size: 0.65rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         .label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.5; margin-bottom: 12px; display: block; }
@@ -228,7 +248,11 @@
                     <button class="btn-small btn-outline-small" onclick="navTo('screen-breathing'); startBreathing();">Relax First</button>
                 </div>
             </div>
-            <p style="text-align:center; font-size:0.6rem; opacity:0.4; margin-top:auto; padding-bottom:20px;">Recmike Chronicles Support</p>
+
+            <div class="footer-branding">
+                <img src="logo.png" alt="Logo" class="footer-logo" onerror="this.style.display='none'">
+                <span class="footer-text">Community Support Project</span>
+            </div>
         </div>
 
         <div id="screen-breathing" class="screen">
