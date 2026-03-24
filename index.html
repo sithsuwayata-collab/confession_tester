@@ -40,8 +40,8 @@
             transition: all 0.8s ease;
         }
 
-        /* Consistent Modern App Frame */
-        .app-container {
+        /* The Unified App Frame */
+        .app-shell {
             width: 100%;
             max-width: 440px;
             padding: 20px;
@@ -49,6 +49,7 @@
             flex-direction: column;
             min-height: 100vh;
             z-index: 10;
+            position: relative;
         }
 
         header { text-align: center; margin: 10px 0 20px; }
@@ -122,24 +123,24 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
-        .btn-send:disabled { background: #1e293b; color: #475569; }
+        .btn-send:disabled { background: #1e293b; color: #475569; cursor: not-allowed; }
 
-        /* Support & Breathing Screens */
-        .full-overlay {
-            position: fixed; inset: 0; background: var(--bg-color);
-            display: flex; justify-content: center; z-index: 100;
-        }
-
+        /* Animation States */
         .breathing-sphere {
-            width: 120px; height: 120px;
+            width: 120px;
+            height: 120px;
             background: var(--accent);
             border-radius: 50%;
+            margin: 40px auto;
             box-shadow: 0 0 50px var(--accent);
             transition: all 4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        .screen { display: none; flex-direction: column; width: 100%; }
+        .screen.active { display: flex; }
     </style>
 </head>
 <body>
@@ -147,81 +148,84 @@
     <div class="orb" id="orb-1" style="top: -10%; left: -10%; background: var(--accent);"></div>
     <div class="orb" id="orb-2" style="bottom: -10%; right: -10%; background: #a855f7;"></div>
 
-    <div id="support-screen" class="full-overlay">
-        <div class="app-container">
+    <div class="app-shell">
+        
+        <div id="screen-support" class="screen active">
             <header>
                 <div style="font-size: 3rem; margin-bottom: 10px;">🌿</div>
-                <h1>Welcome</h1>
-                <p>A safe space for your thoughts</p>
+                <h1>Take a Moment</h1>
+                <p>We care about your well-being</p>
             </header>
-            
             <div class="card" style="text-align: center;">
                 <h3 style="color:var(--accent); margin-top: 0;">You are not alone.</h3>
-                <p style="opacity: 0.8; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5;">
-                    If you are experiencing a mental health difficulty, support is just a call away.
+                <p style="opacity: 0.8; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.6;">
+                    If you are in a difficult situation, please reach out for help:
                 </p>
-                
                 <a href="tel:1926" class="btn-send" style="background:#ef4444; color:white;">Call 1926 (Sri Lanka)</a>
                 <a href="tel:988" class="btn-send" style="background:#3b82f6; color:white;">Call 988 (Canada)</a>
-
+                
                 <div style="display: flex; gap: 10px; margin-top: 20px;">
-                    <button class="btn-send" style="background: rgba(255,255,255,0.05); border: 1px solid var(--accent); color: var(--accent);" onclick="startBreathing()">Relax First</button>
-                    <button class="btn-send" onclick="closeSupport()">Enter Wall</button>
+                    <button class="btn-send" style="background: rgba(255,255,255,0.05); border: 1px solid var(--accent); color: var(--accent);" onclick="navTo('screen-breathing'); startBreathing();">Relax First</button>
+                    <button class="btn-send" onclick="navTo('screen-wall')">Continue</button>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div id="breathing-screen" class="full-overlay" style="display:none; flex-direction:column; align-items:center; justify-content:center;">
-        <div id="breathing-text" style="font-size: 1.8rem; color: var(--accent); margin-bottom: 50px; font-weight: 300;">Prepare...</div>
-        <div id="breathing-sphere" class="breathing-sphere"></div>
-        <button class="btn-send" style="width:auto; margin-top: 80px; padding: 12px 40px; background:transparent; border:1px solid var(--accent); color:var(--accent);" onclick="stopBreathing()">I Feel Better</button>
-    </div>
-
-    <div id="app-shell" class="app-container" style="display:none;">
-        <header>
-            <img src="logo.png" alt="Logo" class="app-logo" onerror="this.style.display='none'">
-            <h1>Confession Wall</h1>
-            <p>Speak your truth anonymously</p>
-        </header>
-
-        <div id="main-card" class="card">
-            <span class="label">Choose your mood</span>
-            <div class="emotion-grid">
-                <div class="emotion-item" onclick="setMood('Happy', '#f59e0b', '#2d1a01')"><span>😊</span><span>Happy</span></div>
-                <div class="emotion-item" onclick="setMood('Sad', '#3b82f6', '#020617')"><span>😢</span><span>Sad</span></div>
-                <div class="emotion-item" onclick="setMood('Angry', '#ef4444', '#1a0505')"><span>😠</span><span>Angry</span></div>
-                <div class="emotion-item" onclick="setMood('Calm', '#10b981', '#051a10')"><span>😌</span><span>Calm</span></div>
-                <div class="emotion-item" onclick="setMood('Excited', '#ec4899', '#2d061a')"><span>🤩</span><span>Excited</span></div>
-                <div class="emotion-item" onclick="setMood('Confused', '#a855f7', '#1a0b2e')"><span>🤔</span><span>Confused</span></div>
-                <div class="emotion-item" onclick="setMood('Loved', '#f43f5e', '#31040d')"><span>🥰</span><span>Loved</span></div>
-                <div class="emotion-item" onclick="setMood('Lonely', '#64748b', '#0f172a')"><span>😶</span><span>Lonely</span></div>
+        <div id="screen-breathing" class="screen">
+            <header>
+                <h1>Breathe</h1>
+                <p>Follow the light</p>
+            </header>
+            <div class="card" style="text-align: center; padding: 40px 20px;">
+                <div id="breathing-text" style="font-size: 1.5rem; color: var(--accent); font-weight: 300; height: 2rem;">Ready?</div>
+                <div id="breathing-sphere" class="breathing-sphere"></div>
+                <button class="btn-send" style="margin-top: 40px; background: transparent; border: 1px solid var(--accent); color: var(--accent);" onclick="stopBreathing(); navTo('screen-wall');">I Feel Better</button>
             </div>
-
-            <span class="label">Your message</span>
-            <textarea id="confession" rows="5" placeholder="Write something..."></textarea>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <span style="font-size: 0.8rem; opacity: 0.7;">Allow comments?</span>
-                <div style="display: flex; gap: 5px; background: rgba(0,0,0,0.2); padding: 4px; border-radius: 10px;">
-                    <button id="opt-no" class="btn-send active" style="width:auto; padding:6px 15px; font-size:0.75rem; margin:0;" onclick="setComments('No')">No</button>
-                    <button id="opt-yes" class="btn-send" style="width:auto; padding:6px 15px; font-size:0.75rem; margin:0; background:transparent; color:white;" onclick="setComments('Yes')">Yes</button>
-                </div>
-            </div>
-
-            <button id="send-btn" class="btn-send" disabled onclick="handleSend()">Post Confession</button>
         </div>
-    </div>
 
-    <div id="success-msg" class="full-overlay" style="display:none;">
-        <div class="app-container" style="justify-content:center;">
-            <div class="card" style="text-align: center;">
+        <div id="screen-wall" class="screen">
+            <header>
+                <img src="logo.png" alt="Logo" class="app-logo" onerror="this.style.display='none'">
+                <h1>Confession Wall</h1>
+                <p>Speak your truth anonymously</p>
+            </header>
+            <div class="card">
+                <span class="label">Choose your mood</span>
+                <div class="emotion-grid">
+                    <div class="emotion-item" onclick="setMood('Happy', '#f59e0b', '#2d1a01')"><span>😊</span><span>Happy</span></div>
+                    <div class="emotion-item" onclick="setMood('Sad', '#3b82f6', '#020617')"><span>😢</span><span>Sad</span></div>
+                    <div class="emotion-item" onclick="setMood('Angry', '#ef4444', '#1a0505')"><span>😠</span><span>Angry</span></div>
+                    <div class="emotion-item" onclick="setMood('Calm', '#10b981', '#051a10')"><span>😌</span><span>Calm</span></div>
+                    <div class="emotion-item" onclick="setMood('Excited', '#ec4899', '#2d061a')"><span>🤩</span><span>Excited</span></div>
+                    <div class="emotion-item" onclick="setMood('Loved', '#f43f5e', '#31040d')"><span>🥰</span><span>Loved</span></div>
+                    <div class="emotion-item" onclick="setMood('Lonely', '#64748b', '#0f172a')"><span>😶</span><span>Lonely</span></div>
+                    <div class="emotion-item" onclick="setMood('Confused', '#a855f7', '#1a0b2e')"><span>🤔</span><span>Confused</span></div>
+                </div>
+
+                <span class="label">Your message</span>
+                <textarea id="confession" rows="5" placeholder="Write something..."></textarea>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <span style="font-size: 0.8rem; opacity: 0.7;">Allow comments?</span>
+                    <div style="display: flex; gap: 5px; background: rgba(0,0,0,0.2); padding: 4px; border-radius: 10px;">
+                        <button id="opt-no" class="btn-send active" style="width:auto; padding:6px 15px; font-size:0.75rem; margin:0;" onclick="setComments('No')">No</button>
+                        <button id="opt-yes" class="btn-send" style="width:auto; padding:6px 15px; font-size:0.75rem; margin:0; background:transparent; color:white;" onclick="setComments('Yes')">Yes</button>
+                    </div>
+                </div>
+
+                <button id="send-btn" class="btn-send" disabled onclick="handleSend()">Post Confession</button>
+            </div>
+        </div>
+
+        <div id="screen-success" class="screen">
+            <div class="card" style="text-align: center; margin-top: 100px;">
                 <div style="font-size: 4rem; margin-bottom: 20px;">🕊️</div>
                 <h2 style="color:var(--accent);">Sent</h2>
                 <p style="opacity: 0.8;">Your confession will appear within 24 hours.</p>
                 <button class="btn-send" style="margin-top: 25px;" onclick="location.reload()">Back</button>
             </div>
         </div>
+
     </div>
 
     <script>
@@ -231,25 +235,24 @@
         const textarea = document.getElementById('confession');
         const sendBtn = document.getElementById('send-btn');
 
-        function closeSupport() {
-            document.getElementById('support-screen').style.display = 'none';
-            document.getElementById('app-shell').style.display = 'flex';
-            document.body.style.overflowY = 'auto';
+        // Global Navigation
+        function navTo(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
         }
 
+        // Breathing Animation
         function startBreathing() {
-            document.getElementById('support-screen').style.display = 'none';
-            document.getElementById('breathing-screen').style.display = 'flex';
             const sphere = document.getElementById('breathing-sphere');
             const text = document.getElementById('breathing-text');
             let step = 0;
             const phases = [
-                { t: "Inhale...", s: "240px", o: "1", b: "40px" },
-                { t: "Hold...", s: "240px", o: "0.7", b: "60px" },
-                { t: "Exhale...", s: "120px", o: "1", b: "20px" },
-                { t: "Hold...", s: "120px", o: "0.7", b: "10px" }
+                { t: "Inhale...", s: "220px", o: "1", b: "50px" },
+                { t: "Hold...", s: "220px", o: "0.6", b: "70px" },
+                { t: "Exhale...", s: "110px", o: "1", b: "30px" },
+                { t: "Hold...", s: "110px", o: "0.6", b: "10px" }
             ];
-            const runCycle = () => {
+            const cycle = () => {
                 const p = phases[step % 4];
                 text.innerText = p.t;
                 sphere.style.width = p.s;
@@ -258,17 +261,13 @@
                 sphere.style.boxShadow = `0 0 ${p.b} var(--accent)`;
                 step++;
             };
-            runCycle();
-            breatheInterval = setInterval(runCycle, 4000);
+            cycle();
+            breatheInterval = setInterval(cycle, 4000);
         }
 
-        function stopBreathing() {
-            clearInterval(breatheInterval);
-            document.getElementById('breathing-screen').style.display = 'none';
-            document.getElementById('app-shell').style.display = 'flex';
-            document.body.style.overflowY = 'auto';
-        }
+        function stopBreathing() { clearInterval(breatheInterval); }
 
+        // Wall Logic
         function setMood(mood, color, darkColor) {
             selectedMood = mood;
             document.documentElement.style.setProperty('--accent', color);
@@ -301,12 +300,9 @@
             formData.append("entry.2052317827", allowComments);
 
             fetch(googleFormUrl, { method: "POST", mode: "no-cors", body: formData })
-            .then(() => { 
-                document.getElementById('app-shell').style.display = 'none';
-                document.getElementById('success-msg').style.display = 'flex'; 
-            })
+            .then(() => { navTo('screen-success'); })
             .catch(() => {
-                alert("Failed. Check connection.");
+                alert("Failed to post. Check connection.");
                 sendBtn.disabled = false;
                 sendBtn.innerText = "Post Confession";
             });
