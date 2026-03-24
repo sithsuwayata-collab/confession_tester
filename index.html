@@ -25,7 +25,7 @@
             display: flex;
             justify-content: center;
             min-height: 100vh;
-            overflow-y: auto;
+            overflow: hidden; /* Changed to hidden to manage screen transitions */
             transition: background 0.8s ease;
         }
 
@@ -44,9 +44,10 @@
             width: 100%;
             max-width: 440px;
             padding: 20px;
-            display: flex;
+            display: none; /* Initially hidden to show Support Screen */
             flex-direction: column;
             min-height: 100vh;
+            overflow-y: auto;
         }
 
         header { text-align: center; margin: 10px 0 20px; }
@@ -144,12 +145,35 @@
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 4px 0 rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
         }
 
         .btn-send:disabled { background: #1e293b; color: #475569; cursor: not-allowed; box-shadow: none; }
         .btn-send:active:not(:disabled) { transform: translateY(2px); box-shadow: none; }
 
-        /* Disclaimer inside the app frame */
+        /* New Support and Breathing Styles */
+        #support-screen, #success-msg {
+            position: fixed; inset: 0; background: var(--bg-color);
+            display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100;
+            padding: 20px;
+        }
+
+        #breathing-screen {
+            display: none; position: fixed; inset: 0; background: var(--bg-color);
+            z-index: 200; flex-direction: column; align-items: center; justify-content: center;
+        }
+
+        .breathing-circle {
+            width: 180px; height: 180px;
+            border: 4px solid var(--accent);
+            border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 4s linear;
+        }
+
         .inner-disclaimer {
             text-align: center;
             font-size: 0.65rem;
@@ -158,19 +182,40 @@
             line-height: 1.4;
         }
         .inner-disclaimer a { color: var(--accent); text-decoration: none; }
-
-        #success-msg {
-            position: fixed; inset: 0; background: var(--bg-color);
-            display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 100;
-            padding: 20px;
-        }
-        .success-card { width: 100%; max-width: 380px; text-align: center; }
     </style>
 </head>
 <body>
 
     <div class="orb" id="orb-1" style="top: -10%; left: -10%; background: var(--accent);"></div>
     <div class="orb" id="orb-2" style="bottom: -10%; right: -10%; background: #a855f7;"></div>
+
+    <div id="support-screen">
+        <div class="card success-card" style="max-width: 400px; text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 15px;">🌿</div>
+            <h2 style="color:var(--accent); margin-bottom: 10px;">You are not alone.</h2>
+            <p style="opacity: 0.8; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5;">
+                If you are in a difficult situation, help is available. Please reach out to these professional services:
+            </p>
+            
+            <a href="tel:1926" class="btn-send" style="background:#ef4444; color:white; margin-bottom:10px;">
+                Call 1926 (Sri Lanka)
+            </a>
+            <a href="tel:988" class="btn-send" style="background:#3b82f6; color:white; margin-bottom:25px;">
+                Call 988 (Canada)
+            </a>
+
+            <div style="display: flex; gap: 10px;">
+                <button class="btn-send" style="background: rgba(255,255,255,0.05); border: 1px solid var(--accent); color: var(--accent);" onclick="startBreathing()">Relax</button>
+                <button class="btn-send" onclick="closeSupport()">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="breathing-screen">
+        <div id="breathing-text" style="font-size: 1.8rem; color: var(--accent); margin-bottom: 40px; font-weight: 600;">Ready?</div>
+        <div id="breathing-square" class="breathing-circle"></div>
+        <button class="btn-send" style="width:auto; margin-top: 50px; padding: 12px 40px;" onclick="stopBreathing()">I'm Calm Now</button>
+    </div>
 
     <div id="app-shell">
         <header>
@@ -212,7 +257,7 @@
         </div>
     </div>
 
-    <div id="success-msg">
+    <div id="success-msg" style="display:none;">
         <div class="card success-card">
             <div style="font-size: 4rem; margin-bottom: 20px;">🕊️</div>
             <h2 style="color:var(--accent); margin: 0 0 15px 0;">Message Received</h2>
@@ -226,9 +271,52 @@
     <script>
         let selectedMood = "";
         let allowComments = "No";
+        let breatheInterval;
         const textarea = document.getElementById('confession');
         const sendBtn = document.getElementById('send-btn');
 
+        // Transitions
+        function closeSupport() {
+            document.getElementById('support-screen').style.display = 'none';
+            document.getElementById('app-shell').style.display = 'flex';
+            document.body.style.overflowY = 'auto';
+        }
+
+        // Breathing Logic
+        function startBreathing() {
+            document.getElementById('support-screen').style.display = 'none';
+            document.getElementById('breathing-screen').style.display = 'flex';
+            const box = document.getElementById('breathing-square');
+            const text = document.getElementById('breathing-text');
+            let step = 0;
+
+            const phases = [
+                { t: "Inhale...", s: "scale(1.4)", o: "1" },
+                { t: "Hold...", s: "scale(1.4)", o: "0.6" },
+                { t: "Exhale...", s: "scale(1)", o: "1" },
+                { t: "Hold...", s: "scale(1)", o: "0.6" }
+            ];
+
+            const runCycle = () => {
+                const p = phases[step % 4];
+                text.innerText = p.t;
+                box.style.transform = p.s;
+                box.style.opacity = p.o;
+                step++;
+            };
+
+            runCycle();
+            breatheInterval = setInterval(runCycle, 4000);
+        }
+
+        function stopBreathing() {
+            clearInterval(breatheInterval);
+            document.getElementById('breathing-screen').style.display = 'none';
+            document.getElementById('app-shell').style.display = 'flex';
+            document.body.style.overflowY = 'auto';
+        }
+
+        // Existing App Logic
         function setMood(mood, color, darkColor) {
             selectedMood = mood;
             document.documentElement.style.setProperty('--accent', color);
