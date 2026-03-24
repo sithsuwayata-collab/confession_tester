@@ -40,7 +40,6 @@
             transition: all 0.8s ease;
         }
 
-        /* The Unified App Frame */
         .app-shell {
             width: 100%;
             max-width: 440px;
@@ -53,9 +52,9 @@
         }
 
         header { text-align: center; margin: 10px 0 20px; }
-        .app-logo { width: 80px; height: auto; margin-bottom: 10px; filter: drop-shadow(0 0 8px var(--accent)); }
-        header h1 { font-weight: 700; letter-spacing: 1px; margin: 0; font-size: 1.8rem; color: var(--accent); }
-        header p { opacity: 0.6; font-size: 0.8rem; margin-top: 5px; }
+        .app-logo { width: 70px; height: auto; margin-bottom: 10px; filter: drop-shadow(0 0 8px var(--accent)); }
+        header h1 { font-weight: 700; letter-spacing: 1px; margin: 0; font-size: 1.6rem; color: var(--accent); }
+        header p { opacity: 0.6; font-size: 0.75rem; margin-top: 5px; }
 
         .card {
             background: var(--glass);
@@ -66,6 +65,63 @@
             padding: 25px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.4);
             margin-bottom: 20px;
+        }
+
+        /* First Screen Customizations */
+        #screen-support {
+            /* Replace the background below if you have an image URL */
+            background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+            border-radius: 30px;
+            height: 95vh;
+            margin-top: 2.5vh;
+        }
+
+        .flag-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 20px 0;
+        }
+
+        .flag-link {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        .flag-link:hover { transform: scale(1.1); }
+
+        .flag-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            object-fit: cover;
+            margin-bottom: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .flag-label { font-size: 0.7rem; color: var(--accent); font-weight: 600; opacity: 0.8; }
+
+        .btn-small {
+            padding: 12px 20px;
+            font-size: 0.85rem;
+            border-radius: 12px;
+            background: var(--accent);
+            color: #000;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            width: auto;
+            min-width: 120px;
+        }
+
+        .btn-outline-small {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: #fff;
         }
 
         .label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.5; margin-bottom: 12px; display: block; }
@@ -89,11 +145,7 @@
             transition: all 0.2s ease;
         }
 
-        .emotion-item.active {
-            background: rgba(255,255,255,0.1);
-            border-color: var(--accent);
-            box-shadow: 0 0 15px var(--accent);
-        }
+        .emotion-item.active { background: rgba(255,255,255,0.1); border-color: var(--accent); box-shadow: 0 0 15px var(--accent); }
 
         textarea {
             width: 100%;
@@ -128,10 +180,8 @@
 
         .btn-send:disabled { background: #1e293b; color: #475569; cursor: not-allowed; }
 
-        /* Animation States */
         .breathing-sphere {
-            width: 120px;
-            height: 120px;
+            width: 120px; height: 120px;
             background: var(--accent);
             border-radius: 50%;
             margin: 40px auto;
@@ -151,24 +201,34 @@
     <div class="app-shell">
         
         <div id="screen-support" class="screen active">
-            <header>
-                <div style="font-size: 3rem; margin-bottom: 10px;">🌿</div>
-                <h1>Take a Moment</h1>
-                <p>We care about your well-being</p>
+            <header style="margin-top: 30px;">
+                <div style="font-size: 2.5rem; margin-bottom: 10px;">🌿</div>
+                <h1>Welcome</h1>
+                <p>A safe space for your mind</p>
             </header>
-            <div class="card" style="text-align: center;">
-                <h3 style="color:var(--accent); margin-top: 0;">You are not alone.</h3>
-                <p style="opacity: 0.8; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.6;">
-                    If you are in a difficult situation, please reach out for help:
+            
+            <div class="card" style="text-align: center; margin: 0 10px;">
+                <p style="opacity: 0.8; font-size: 0.85rem; line-height: 1.6; margin-bottom: 10px;">
+                    If you're feeling overwhelmed, help is available.
                 </p>
-                <a href="tel:1926" class="btn-send" style="background:#ef4444; color:white;">Call 1926 (Sri Lanka)</a>
-                <a href="tel:988" class="btn-send" style="background:#3b82f6; color:white;">Call 988 (Canada)</a>
                 
-                <div style="display: flex; gap: 10px; margin-top: 20px;">
-                    <button class="btn-send" style="background: rgba(255,255,255,0.05); border: 1px solid var(--accent); color: var(--accent);" onclick="navTo('screen-breathing'); startBreathing();">Relax First</button>
-                    <button class="btn-send" onclick="navTo('screen-wall')">Continue</button>
+                <div class="flag-container">
+                    <a href="tel:1926" class="flag-link">
+                        <img src="https://flagcdn.com/w160/lk.png" class="flag-circle" alt="Sri Lanka">
+                        <span class="flag-label">1926</span>
+                    </a>
+                    <a href="tel:988" class="flag-link">
+                        <img src="https://flagcdn.com/w160/ca.png" class="flag-circle" alt="Canada">
+                        <span class="flag-label">988</span>
+                    </a>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 12px; align-items: center; margin-top: 20px;">
+                    <button class="btn-small" onclick="navTo('screen-wall')">Enter Wall</button>
+                    <button class="btn-small btn-outline-small" onclick="navTo('screen-breathing'); startBreathing();">Relax First</button>
                 </div>
             </div>
+            <p style="text-align:center; font-size:0.6rem; opacity:0.4; margin-top:auto; padding-bottom:20px;">Recmike Chronicles Support</p>
         </div>
 
         <div id="screen-breathing" class="screen">
@@ -179,7 +239,7 @@
             <div class="card" style="text-align: center; padding: 40px 20px;">
                 <div id="breathing-text" style="font-size: 1.5rem; color: var(--accent); font-weight: 300; height: 2rem;">Ready?</div>
                 <div id="breathing-sphere" class="breathing-sphere"></div>
-                <button class="btn-send" style="margin-top: 40px; background: transparent; border: 1px solid var(--accent); color: var(--accent);" onclick="stopBreathing(); navTo('screen-wall');">I Feel Better</button>
+                <button class="btn-small btn-outline-small" style="margin-top: 40px;" onclick="stopBreathing(); navTo('screen-wall');">I'm Ready Now</button>
             </div>
         </div>
 
@@ -208,8 +268,8 @@
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                     <span style="font-size: 0.8rem; opacity: 0.7;">Allow comments?</span>
                     <div style="display: flex; gap: 5px; background: rgba(0,0,0,0.2); padding: 4px; border-radius: 10px;">
-                        <button id="opt-no" class="btn-send active" style="width:auto; padding:6px 15px; font-size:0.75rem; margin:0;" onclick="setComments('No')">No</button>
-                        <button id="opt-yes" class="btn-send" style="width:auto; padding:6px 15px; font-size:0.75rem; margin:0; background:transparent; color:white;" onclick="setComments('Yes')">Yes</button>
+                        <button id="opt-no" class="btn-small" style="min-width:60px; padding:6px 12px;" onclick="setComments('No')">No</button>
+                        <button id="opt-yes" class="btn-small btn-outline-small" style="min-width:60px; padding:6px 12px;" onclick="setComments('Yes')">Yes</button>
                     </div>
                 </div>
 
@@ -235,13 +295,11 @@
         const textarea = document.getElementById('confession');
         const sendBtn = document.getElementById('send-btn');
 
-        // Global Navigation
         function navTo(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
         }
 
-        // Breathing Animation
         function startBreathing() {
             const sphere = document.getElementById('breathing-sphere');
             const text = document.getElementById('breathing-text');
@@ -267,7 +325,6 @@
 
         function stopBreathing() { clearInterval(breatheInterval); }
 
-        // Wall Logic
         function setMood(mood, color, darkColor) {
             selectedMood = mood;
             document.documentElement.style.setProperty('--accent', color);
@@ -281,10 +338,15 @@
 
         function setComments(val) {
             allowComments = val;
-            document.getElementById('opt-yes').style.background = val === 'Yes' ? 'var(--accent)' : 'transparent';
-            document.getElementById('opt-yes').style.color = val === 'Yes' ? '#000' : 'white';
-            document.getElementById('opt-no').style.background = val === 'No' ? 'var(--accent)' : 'transparent';
-            document.getElementById('opt-no').style.color = val === 'No' ? '#000' : 'white';
+            const y = document.getElementById('opt-yes');
+            const n = document.getElementById('opt-no');
+            if(val === 'Yes'){
+                y.classList.remove('btn-outline-small');
+                n.classList.add('btn-outline-small');
+            } else {
+                n.classList.remove('btn-outline-small');
+                y.classList.add('btn-outline-small');
+            }
         }
 
         textarea.addEventListener('input', validate);
@@ -302,7 +364,7 @@
             fetch(googleFormUrl, { method: "POST", mode: "no-cors", body: formData })
             .then(() => { navTo('screen-success'); })
             .catch(() => {
-                alert("Failed to post. Check connection.");
+                alert("Failed. Check connection.");
                 sendBtn.disabled = false;
                 sendBtn.innerText = "Post Confession";
             });
