@@ -131,6 +131,15 @@
             margin: 40px auto; box-shadow: 0 0 50px var(--accent); transition: all 3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        #timer-display {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--accent);
+        }
+
         .screen { display: none; flex-direction: column; width: 100%; height: 100%; }
         .screen.active { display: flex; }
     </style>
@@ -150,7 +159,9 @@
             </header>
             
             <div class="card" style="text-align: center; margin: 0 10px;">
-                <p style="opacity: 0.8; font-size: 0.9rem; line-height: 1.6; margin-bottom: 5px;">Take a deep breath. Support is here.</p>
+                <p style="opacity: 0.9; font-size: 0.95rem; line-height: 1.6; margin-bottom: 5px; font-family: 'Noto Sans Sinhala';">
+                    ඔබේ හිත දැඩි පීඩාවකින් සහ ඉක්මණින් උදව් අවශ්‍ය නම් පහත අංකය අමතන්න
+                </p>
                 <div class="flag-container">
                     <a href="tel:1926" class="flag-link" style="text-decoration: none;">
                         <img src="https://flagcdn.com/w160/lk.png" class="flag-circle" alt="Sri Lanka">
@@ -170,13 +181,13 @@
 
         <div id="screen-breathing" class="screen">
             <header>
-                <h1>Breathe</h1>
-                <p>Follow the light</p>
+                <div id="timer-display">01:00</div>
+                <p>Relax and follow the light</p>
             </header>
-            <div class="card" style="text-align: center; padding: 40px 20px;">
+            <div class="card" style="text-align: center; padding: 20px 20px;">
                 <div id="breathing-text" style="font-size: 1.5rem; color: var(--accent); font-weight: 300; height: 2rem;">Ready?</div>
                 <div id="breathing-sphere" class="breathing-sphere"></div>
-                <button class="btn-small btn-outline-small" style="margin-top: 40px;" onclick="stopBreathing(); navTo('screen-wall');">I'm Ready Now</button>
+                <button class="btn-small btn-outline-small" style="margin-top: 20px;" onclick="stopBreathing(); navTo('screen-wall');">I'm Ready Now</button>
             </div>
         </div>
 
@@ -232,7 +243,7 @@
     <script>
         let selectedMood = "";
         let allowComments = "No";
-        let breatheInterval;
+        let breatheInterval, timerInterval;
         const textarea = document.getElementById('confession');
         const sendBtn = document.getElementById('send-btn');
 
@@ -244,9 +255,24 @@
         function startBreathing() {
             const sphere = document.getElementById('breathing-sphere');
             const text = document.getElementById('breathing-text');
+            const timerDisplay = document.getElementById('timer-display');
             let step = 0;
-            
-            // Cycle: Exhale -> Hold -> Inhale -> Hold (3s per phase)
+            let timeLeft = 60;
+
+            // Timer Logic
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                let mins = Math.floor(timeLeft / 60);
+                let secs = timeLeft % 60;
+                timerDisplay.innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    stopBreathing();
+                    navTo('screen-wall');
+                }
+            }, 1000);
+
+            // Cycle Logic
             const phases = [
                 { t: "Exhale...", s: "110px", o: "1", b: "30px" },
                 { t: "Hold...", s: "110px", o: "0.6", b: "10px" },
@@ -264,10 +290,13 @@
                 step++;
             };
             cycle();
-            breatheInterval = setInterval(cycle, 3000); // Fast 3s phases
+            breatheInterval = setInterval(cycle, 3000);
         }
 
-        function stopBreathing() { clearInterval(breatheInterval); }
+        function stopBreathing() { 
+            clearInterval(breatheInterval); 
+            clearInterval(timerInterval);
+        }
 
         function setMood(mood, color, darkColor) {
             selectedMood = mood;
