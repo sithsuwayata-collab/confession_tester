@@ -25,7 +25,7 @@
             display: flex;
             justify-content: center;
             min-height: 100vh;
-            overflow: hidden; /* Changed to hidden to manage screen transitions */
+            overflow: hidden; 
             transition: background 0.8s ease;
         }
 
@@ -44,7 +44,7 @@
             width: 100%;
             max-width: 440px;
             padding: 20px;
-            display: none; /* Initially hidden to show Support Screen */
+            display: none; 
             flex-direction: column;
             min-height: 100vh;
             overflow-y: auto;
@@ -152,9 +152,8 @@
         }
 
         .btn-send:disabled { background: #1e293b; color: #475569; cursor: not-allowed; box-shadow: none; }
-        .btn-send:active:not(:disabled) { transform: translateY(2px); box-shadow: none; }
 
-        /* New Support and Breathing Styles */
+        /* Support & Breathing Overlays */
         #support-screen, #success-msg {
             position: fixed; inset: 0; background: var(--bg-color);
             display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100;
@@ -166,12 +165,12 @@
             z-index: 200; flex-direction: column; align-items: center; justify-content: center;
         }
 
-        .breathing-circle {
-            width: 180px; height: 180px;
-            border: 4px solid var(--accent);
-            border-radius: 20px;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 4s linear;
+        .breathing-sphere {
+            width: 120px; height: 120px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 50px var(--accent);
+            transition: all 4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .inner-disclaimer {
@@ -181,7 +180,6 @@
             margin-top: 15px;
             line-height: 1.4;
         }
-        .inner-disclaimer a { color: var(--accent); text-decoration: none; }
     </style>
 </head>
 <body>
@@ -190,31 +188,25 @@
     <div class="orb" id="orb-2" style="bottom: -10%; right: -10%; background: #a855f7;"></div>
 
     <div id="support-screen">
-        <div class="card success-card" style="max-width: 400px; text-align: center;">
+        <div class="card" style="max-width: 400px; text-align: center;">
             <div style="font-size: 3rem; margin-bottom: 15px;">🌿</div>
-            <h2 style="color:var(--accent); margin-bottom: 10px;">You are not alone.</h2>
-            <p style="opacity: 0.8; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5;">
-                If you are in a difficult situation, help is available. Please reach out to these professional services:
-            </p>
+            <h2 style="color:var(--accent);">You are not alone.</h2>
+            <p style="opacity: 0.8; font-size: 0.9rem; margin-bottom: 25px;">If you are struggling, please reach out:</p>
             
-            <a href="tel:1926" class="btn-send" style="background:#ef4444; color:white; margin-bottom:10px;">
-                Call 1926 (Sri Lanka)
-            </a>
-            <a href="tel:988" class="btn-send" style="background:#3b82f6; color:white; margin-bottom:25px;">
-                Call 988 (Canada)
-            </a>
+            <a href="tel:1926" class="btn-send" style="background:#ef4444; color:white; margin-bottom:10px;">Call 1926 (Sri Lanka)</a>
+            <a href="tel:988" class="btn-send" style="background:#3b82f6; color:white; margin-bottom:25px;">Call 988 (Canada)</a>
 
             <div style="display: flex; gap: 10px;">
-                <button class="btn-send" style="background: rgba(255,255,255,0.05); border: 1px solid var(--accent); color: var(--accent);" onclick="startBreathing()">Relax</button>
+                <button class="btn-send" style="background: rgba(255,255,255,0.05); border: 1px solid var(--accent); color: var(--accent);" onclick="startBreathing()">Relax First</button>
                 <button class="btn-send" onclick="closeSupport()">Continue</button>
             </div>
         </div>
     </div>
 
     <div id="breathing-screen">
-        <div id="breathing-text" style="font-size: 1.8rem; color: var(--accent); margin-bottom: 40px; font-weight: 600;">Ready?</div>
-        <div id="breathing-square" class="breathing-circle"></div>
-        <button class="btn-send" style="width:auto; margin-top: 50px; padding: 12px 40px;" onclick="stopBreathing()">I'm Calm Now</button>
+        <div id="breathing-text" style="font-size: 1.8rem; color: var(--accent); margin-bottom: 50px; font-weight: 300;">Prepare...</div>
+        <div id="breathing-sphere" class="breathing-sphere"></div>
+        <button class="btn-send" style="width:auto; margin-top: 80px; padding: 12px 40px; background:transparent; border:1px solid var(--accent); color:var(--accent);" onclick="stopBreathing()">I Feel Better</button>
     </div>
 
     <div id="app-shell">
@@ -250,20 +242,15 @@
 
             <button id="send-btn" class="btn-send" disabled onclick="handleSend()">Post Confession</button>
 
-            <div class="inner-disclaimer">
-                TRIAL VERSION<br>
-                Your feedback is valued: <a href="https://forms.gle/PbqqLNAnEfXLQZNAA" target="_blank">Send Feedback</a>
-            </div>
+            <div class="inner-disclaimer">TRIAL VERSION</div>
         </div>
     </div>
 
     <div id="success-msg" style="display:none;">
-        <div class="card success-card">
+        <div class="card" style="text-align: center;">
             <div style="font-size: 4rem; margin-bottom: 20px;">🕊️</div>
-            <h2 style="color:var(--accent); margin: 0 0 15px 0;">Message Received</h2>
-            <p style="opacity: 0.8; line-height: 1.5; font-size: 0.95rem;">
-                Your confession has been received and will be posted in the group within 24 hours.
-            </p>
+            <h2 style="color:var(--accent);">Message Received</h2>
+            <p style="opacity: 0.8;">Your confession will be posted within 24 hours.</p>
             <button class="btn-send" style="margin-top: 25px;" onclick="location.reload()">Write Another</button>
         </div>
     </div>
@@ -275,33 +262,35 @@
         const textarea = document.getElementById('confession');
         const sendBtn = document.getElementById('send-btn');
 
-        // Transitions
+        // Transition Functions
         function closeSupport() {
             document.getElementById('support-screen').style.display = 'none';
             document.getElementById('app-shell').style.display = 'flex';
             document.body.style.overflowY = 'auto';
         }
 
-        // Breathing Logic
+        // Creative Breathing Logic
         function startBreathing() {
             document.getElementById('support-screen').style.display = 'none';
             document.getElementById('breathing-screen').style.display = 'flex';
-            const box = document.getElementById('breathing-square');
+            const sphere = document.getElementById('breathing-sphere');
             const text = document.getElementById('breathing-text');
             let step = 0;
 
             const phases = [
-                { t: "Inhale...", s: "scale(1.4)", o: "1" },
-                { t: "Hold...", s: "scale(1.4)", o: "0.6" },
-                { t: "Exhale...", s: "scale(1)", o: "1" },
-                { t: "Hold...", s: "scale(1)", o: "0.6" }
+                { t: "Inhale...", s: "240px", o: "1", b: "40px" },
+                { t: "Hold...", s: "240px", o: "0.7", b: "60px" },
+                { t: "Exhale...", s: "120px", o: "1", b: "20px" },
+                { t: "Hold...", s: "120px", o: "0.7", b: "10px" }
             ];
 
             const runCycle = () => {
                 const p = phases[step % 4];
                 text.innerText = p.t;
-                box.style.transform = p.s;
-                box.style.opacity = p.o;
+                sphere.style.width = p.s;
+                sphere.style.height = p.s;
+                sphere.style.opacity = p.o;
+                sphere.style.boxShadow = `0 0 ${p.b} var(--accent)`;
                 step++;
             };
 
@@ -316,12 +305,11 @@
             document.body.style.overflowY = 'auto';
         }
 
-        // Existing App Logic
+        // --- FORM LOGIC ---
         function setMood(mood, color, darkColor) {
             selectedMood = mood;
             document.documentElement.style.setProperty('--accent', color);
             document.documentElement.style.setProperty('--bg-color', darkColor);
-            
             document.querySelectorAll('.emotion-item').forEach(el => {
                 el.classList.remove('active');
                 if(el.innerText.includes(mood)) el.classList.add('active');
@@ -345,6 +333,7 @@
             sendBtn.disabled = true;
             sendBtn.innerText = "Posting...";
             
+            // Your Google Form URL and Entry IDs
             const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeAjECgMa-xcpy0LrZLWwW9GLmk6e7KStAdCm7qBFslchRHnA/formResponse";
             const formData = new FormData();
             formData.append("entry.1714490811", selectedMood);
